@@ -11,7 +11,7 @@ async function run() {
 
     const hashed = await bcrypt.hash('12345678', 10);
 
-    const existe = await User.findOne({ email: 'admin2@gmail.com' });
+    const existe = await User.findOne({ email: 'admin3@gmail.com' });
     if (existe) {
         console.log('⚠️  El email ya está registrado');
         await mongoose.disconnect();
@@ -20,13 +20,13 @@ async function run() {
 
     await User.create({
         name: 'Nuevo Admin',
-        email: 'admin2@gmail.com',
+        email: 'admin3@gmail.com',
         password: hashed,
         role: 'admin'
     });
 
     console.log('✅ Admin creado');
-    console.log('   Email:    admin2@gmail.com');
+    console.log('   Email:    admin3@gmail.com');
     console.log('   Password: 12345678');
 
     await mongoose.disconnect();

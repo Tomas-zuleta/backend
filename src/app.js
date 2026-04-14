@@ -1,19 +1,23 @@
+import express from 'express';
+import cors from 'cors';
+import morgan from 'morgan';
+
+import authRoutes from './routes/auth.routes.js'; 
+import habitacionRoutes from './routes/habitacion.routes.js';
+
+const app = express();
+
 const corsOptions = {
-    origin: [
-        'http://localhost:5173',
-        'http://localhost:5174',
-        'https://tallerfinal.vercel.app'
-    ],
+    origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-};
+  };
 
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
-
 app.use(morgan('dev'));
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
 app.use('/api/habitaciones', habitacionRoutes);
+
+export default app;
